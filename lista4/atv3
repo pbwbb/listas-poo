@@ -1,0 +1,58 @@
+class Criptografia:
+    def cifrar(self, texto):
+        pass
+
+    def decifrar(self, texto_cifrado):
+        pass
+
+class CifraCesar(Criptografia):
+    def __init__(self, deslocamento):
+        self.deslocamento = deslocamento % 26  # Garante que o deslocamento seja no intervalo de uma volta no alfabeto
+
+    def cifrar(self, texto):
+        texto_cifrado = ""
+        for char in texto:
+            if char.isalpha():  # Verifica se o caractere é uma letra
+                if char.islower():
+                    novo_char = chr(((ord(char) - ord('a') + self.deslocamento) % 26) + ord('a'))
+                else:
+                    novo_char = chr(((ord(char) - ord('A') + self.deslocamento) % 26) + ord('A'))
+                texto_cifrado += novo_char
+            else:
+                texto_cifrado += char
+        return texto_cifrado
+
+    def decifrar(self, texto_cifrado):
+        return self.cifrar(texto_cifrado)  # A decifração na Cifra de César é o mesmo processo da cifragem com um deslocamento negativo
+
+class CifraXor(Criptografia):
+    def __init__(self, chave):
+        self.chave = chave
+
+    def cifrar(self, texto):
+        texto_cifrado = ""
+        for char in texto:
+            texto_cifrado += chr(ord(char) ^ self.chave)  # Aplica a operação XOR com a chave em cada caractere
+        return texto_cifrado
+
+    def decifrar(self, texto_cifrado):
+        return self.cifrar(texto_cifrado)  # A operação XOR é reversível aplicando a mesma chave novamente
+
+
+cifra_cesar = CifraCesar(3)  
+cifra_xor = CifraXor(23)     
+
+texto_original = "Exemplo de texto para criptografia."
+print("Texto Original:", texto_original)
+
+texto_cifrado_cesar = cifra_cesar.cifrar(texto_original)
+print("Texto Cifrado (Cifra de César):", texto_cifrado_cesar)
+
+texto_decifrado_cesar = cifra_cesar.decifrar(texto_cifrado_cesar)
+print("Texto Decifrado (Cifra de César):", texto_decifrado_cesar)
+
+texto_cifrado_xor = cifra_xor.cifrar(texto_original)
+print("Texto Cifrado (Cifra XOR):", texto_cifrado_xor)
+
+texto_decifrado_xor = cifra_xor.decifrar(texto_cifrado_xor)
+print("Texto Decifrado (Cifra XOR):", texto_decifrado_xor)
