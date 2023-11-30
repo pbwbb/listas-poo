@@ -1,0 +1,41 @@
+class UnidadeMilitar:
+    def mover(self):
+        pass
+    
+    def atacar(self):
+        pass
+
+class Soldado(UnidadeMilitar):
+    def mover(self):
+        print("Soldado está marchando para a batalha.")
+    
+    def atacar(self):
+        print("Soldado está atacando com sua espada.")
+
+class Arqueiro(UnidadeMilitar):
+    def mover(self):
+        print("Arqueiro está se reposicionando para um local estratégico.")
+    
+    def atacar(self):
+        print("Arqueiro está atirando flechas no inimigo.")
+
+class Cavaleiro(UnidadeMilitar):
+    def mover(self):
+        print("Cavaleiro está galopando em direção ao inimigo.")
+    
+    def atacar(self):
+        print("Cavaleiro está investindo com sua lança.")
+
+
+soldado = Soldado()
+arqueiro = Arqueiro()
+cavaleiro = Cavaleiro()
+
+
+unidades = [soldado, arqueiro, cavaleiro]
+
+
+for unidade in unidades:
+    unidade.mover()
+    unidade.atacar()
+    print()  
